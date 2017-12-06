@@ -23,7 +23,7 @@ public class BookingHotelSteps {
 	public void the_user_log_in_the_Travel_Agency_Page() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    //throw new PendingException();
-		
+		//Comentatio prueba
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.navigate().to("http://www.phptravels.net/");
