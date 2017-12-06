@@ -75,7 +75,7 @@ public class generatedCoupon_Steps {
 		else {
 			System.out.println("Coupons were not created");
 		}
-		driver.close();	
+		driver.quit();	
 	}
 
 	@Given("^user enter to home page$")
@@ -162,7 +162,7 @@ public class generatedCoupon_Steps {
  	    	System.out.println("Test Failed");
  	    } 
 //	    throw new PendingException();
-	    driver.close();
+	    driver.quit();
 	}
 }
 	
