@@ -11,5 +11,5 @@ Then coupons should are visible
 Scenario:
 Coupon discount is added to the total
 Given user enter account initial page
-And coupon created are used
-Then the discount of both coupons are available
+And coupon promo1 is used
+Then coupon promo2 is used
