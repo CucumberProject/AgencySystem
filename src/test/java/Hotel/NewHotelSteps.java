@@ -14,13 +14,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 
-
-
 public class NewHotelSteps {
 
 	WebDriver driver = null;
 	private List<List<String>> board;
-	List <WebElement> list;
 	
 	@Given("^I am on Admin Login Page$")
 	public void i_am_on_Admin_Login_Page() throws Throwable {
@@ -91,7 +88,7 @@ public class NewHotelSteps {
 	    
 		//Select Facilities tab
 		driver.findElement(By.xpath("//*[@id='content']/form/div/ul/li[2]/a")).click();
-		//Select Facilities
+		//Select Facilities 
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[2]/div/div/div[4]/label")).click();
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[2]/div/div/div[7]/label")).click();
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[2]/div/div/div[9]/label")).click();
