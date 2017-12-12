@@ -1,6 +1,6 @@
 Feature: bookinghotel
 
-
+@enabled
 Scenario: The Hotel is enable, the user should be able to book
 Given The user log in the Travel Agency Page
 When The user want to book in a hotel 
@@ -13,6 +13,7 @@ Then The user should be able to book
 | HotelName1| Rendezvous Hotels|
 | HotelName2| Swissotel Le Plaza Basel|
 
+@disabled
 Scenario: The Hotel is disable, The user shouldnt be able to book
 Given The user log in the Travel Agency Page
 When The user want to book in a hotel 
