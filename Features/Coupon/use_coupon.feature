@@ -7,8 +7,8 @@ Given I am on admin login home page
 When I provide username and password
 	| admin@phptravels.com | demoadmin |
 And User go to the coupon page
-	| 75 | 2 | Test | 
 Then User add a new coupon
+	| 75 | 2 | Test | 
 
 
 @useCoupon_maxLimit

@@ -29,7 +29,7 @@ public class infoScreen {
 		// Use coupon
 		public static By validation1 = By.xpath("/html/body/div[4]/div/div[1]/div/div[1]/h3");
 		public static By HotelsList = By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a");
-		public static By Hotel = By.partialLinkText("Hyatt Regency Perth");
+		public static By Hotel = By.xpath("/html/body/div[4]/div[7]/div[2]/div/table/tbody/tr[1]/td/div[2]/div/h4/a/b");
 		public static By Room = By.xpath("//*[@id='ROOMS']/div/table/tbody/tr[1]/td/div[2]/div/div[5]/div[3]");
 		public static By couponcode = By.xpath("//*[@id='bookingdetails']/div[5]/div[2]/div[2]/div[2]/input");
 		public static By couponSubmit = By.xpath("//*[@id='bookingdetails']/div[5]/div[2]/div[2]/div[3]/span");
