@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.openqa.selenium.chrome.ChromeDriver; 
 
 import cucumber.api.DataTable;
@@ -19,7 +22,6 @@ import cucumber.api.java.en.When;
 public class SupplierBookingSteps {
 
 	WebDriver driver = null;
-	private List<List<String>> board;
 	String hotel = "";
 	String totalAmount="";
 	String checkIn ="";
@@ -44,11 +46,14 @@ public class SupplierBookingSteps {
 
 	@When("^Supplier User want to book a hotel in the Supplier page$")
 	public void supplier_User_want_to_book_a_hotel_in_the_Supplier_page() throws Throwable {
-	   
-		driver.navigate().refresh();
-		Thread.sleep(500);
+		
+		WebDriverWait wait = new WebDriverWait(driver,5);
+		
+		//driver.navigate().refresh();
+		//Thread.sleep(500);
 		
 		//Click on "Quick Booking"
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='content']/div[1]/div[1]/button")));
 		driver.findElement(By.xpath("//*[@id='content']/div[1]/div[1]/button")).click();
 		
 		//First window
@@ -71,8 +76,9 @@ public class SupplierBookingSteps {
     	
     	//Enter Check in and Check out date
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[1]/div")).click();
-    	driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[3]/td[1]")).click();
-    	driver.findElement(By.xpath("/html/body/div[4]/div[1]/table/tbody/tr[4]/td[1]")).click();
+    	driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[1]")).click();
+    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[6]")));
+    	driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[6]")).click();
 
     	//Stored check in and check out information
     	
@@ -87,15 +93,17 @@ public class SupplierBookingSteps {
 		hotel = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[4]/div/div/a/span[1]")).getText();
     	
 		jse.executeScript("window.scrollBy(0,250)", "");
-		Thread.sleep(500);
-		
+		//Thread.sleep(500);
+	
 		//Select Room
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("poprooms")));
     	dropdwn = new Select (driver.findElement(By.id("poprooms")));
 		dropdwn.selectByVisibleText("Superior Double");
 		
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		
 		//Stored Total Amount
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='grandtotal']")));
 		totalAmount = driver.findElement(By.xpath("//*[@id='grandtotal']")).getText(); 
 		
 		//Click on Book Now
@@ -106,13 +114,15 @@ public class SupplierBookingSteps {
 		System.out.println(checkOut);
 		
 		driver.navigate().refresh();
-		Thread.sleep(1000);
-		for (int i=1 ; i < 6 ; i++){
+		//Thread.sleep(1000);
+		for (int i=1 ; i < 10 ; i++){
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='content']/div/div[2]/div/div/div[1]/div[2]/table/tbody/tr["+i+"]/td[12]/span/a[2]")));
 			driver.findElement(By.xpath("//*[@id='content']/div/div[2]/div/div/div[1]/div[2]/table/tbody/tr["+i+"]/td[12]/span/a[2]")).click();
 			
-			Thread.sleep(500);
+			//Thread.sleep(500);
 			if (driver.getPageSource().contains(hotel)&&driver.getPageSource().contains(checkIn)&&driver.getPageSource().contains(checkOut)){
 				//System.out.println("Test Pass");
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[2]/header/nav/div[1]/a")));
 				driver.findElement(By.xpath("/html/body/div[2]/header/nav/div[1]/a")).click();
 				Thread.sleep(500);
 				bookID = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div[2]/table/tbody/tr["+i+"]/td[3]")).getText();
@@ -149,17 +159,13 @@ public class SupplierBookingSteps {
 	    JavascriptExecutor jse = (JavascriptExecutor)driver;
     	jse.executeScript("window.scrollBy(0,500)", "");
 	    Thread.sleep(1000);
-	
+	    
+	    
 	    boolean book = (driver.getPageSource().contains(bookID) && driver.getPageSource().contains(bookCode));
 	    System.out.println(book);
-	    
 		
-		if (book){
-			System.out.println("Test Pass");
-			System.out.println("Booking successfull from Supplier Page");
-		}else{
-			System.out.println("Test Fail");
-		}
+		 Assert.assertTrue(book);
+		 System.out.println("Test Pass, Booking successfully from Supplier Pages");
 		
 		driver.quit();
 	}
