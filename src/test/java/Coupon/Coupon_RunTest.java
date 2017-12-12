@@ -6,7 +6,7 @@ import cucumber.api.junit.Cucumber;
 
 	@RunWith(Cucumber.class) 
 	@CucumberOptions(
-			features = "Features//Coupon//use_coupon.feature"
+			features = "Features//Coupon//genarated_coupon.feature"
 			)
 	public class Coupon_RunTest {
 }

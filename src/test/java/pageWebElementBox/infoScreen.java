@@ -26,6 +26,13 @@ public class infoScreen {
 		public static By passwordUser = By.name("password");
 		public static By LogInButtonUser = By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button");
 		
+		// Asserts
+		public static By coupon1 = By.xpath("//*[@id='content']/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[4]\r\n");
+		public static By coupon2 = By.xpath("//*[@id='content']/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[4]\r\\n");
+		
+		public static By idValidation = By.xpath("//*[@id=\"body-section\"]/div[1]/div/div[7]/div[1]/div[3]/span");
+		
+		
 		// Use coupon
 		public static By validation1 = By.xpath("/html/body/div[4]/div/div[1]/div/div[1]/h3");
 		public static By HotelsList = By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a");
