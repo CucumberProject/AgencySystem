@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -75,8 +76,11 @@ public class NewHotelSteps {
 		//Enter name
 		driver.findElement(infoScreen.hotelName).sendKeys(name);
 		
+		
+		
 		//Enter Description
-		driver.switchTo().frame(0);
+		WebElement desFrame = driver.findElement(infoScreen.hotelDescription);
+		driver.switchTo().frame(desFrame);
 		driver.findElement(By.cssSelector("body")).sendKeys(description);
 		driver.switchTo().defaultContent();
 		
@@ -141,7 +145,8 @@ public class NewHotelSteps {
 
 	@When("^Enter valida information in Contact tab$")
 	public void enter_valida_information_in_Contact_tab(DataTable arg1) throws Throwable {
-	    
+		
+		WebDriverWait wait = new WebDriverWait(driver,5);
 		//Select Contact Tab
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/ul/li[5]/a")).click();
 		
@@ -160,6 +165,7 @@ public class NewHotelSteps {
 		driver.findElement(infoScreen.hotelNumber).click();
 		driver.findElement(infoScreen.hotelNumber).sendKeys(number);
 		//Submit
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.CreateButtonHotel));
 		driver.findElement(infoScreen.CreateButtonHotel).click();
 	}
 
@@ -167,7 +173,7 @@ public class NewHotelSteps {
 	public void the_New_Hotel_should_be_created(DataTable arg1) throws Throwable {
 		WebDriverWait wait = new WebDriverWait(driver,5);
 		
-		driver.navigate().refresh();
+		
 		//Thread.sleep(1000);
 		
 		table = arg1.raw();

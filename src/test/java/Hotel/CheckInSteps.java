@@ -67,8 +67,8 @@ public class CheckInSteps {
 		driver.findElement(infoScreen.hotelName).sendKeys(table.get(1).get(1));
 		
 		//Enter Description
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
-		driver.switchTo().frame(0);
+		WebElement desFrame = driver.findElement(infoScreen.hotelDescription);
+		driver.switchTo().frame(desFrame);
 		driver.findElement(By.cssSelector("body")).sendKeys(table.get(2).get(1));
 		driver.switchTo().defaultContent();
 		

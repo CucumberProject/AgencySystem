@@ -17,6 +17,7 @@ public class infoScreen {
 		public static By hotelAddButton = By.xpath("//*[@id='content']/div/form/button");
 		public static By hotelStatus = By.name("hotelstatus");
 		public static By hotelName = By.name("hotelname");
+		public static By hotelDescription = By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[1]/div[4]/div/div/div/div/iframe");
 		public static By hotelStars = By.name("hotelstars");
 		public static By hotelType = By.name("hoteltype");
 		public static By hotelLocation = By.xpath("//*[@id='s2id_autogen1']");

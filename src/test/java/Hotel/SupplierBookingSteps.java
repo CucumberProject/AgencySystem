@@ -163,6 +163,7 @@ public class SupplierBookingSteps {
 	    
 		driver.findElement(infoScreen.usernameUser).sendKeys("user@phptravels.com");
 	    driver.findElement(infoScreen.passwordUser).sendKeys("demouser");
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(infoScreen.LogInButtonUser));
 	    driver.findElement(infoScreen.LogInButtonUser).click();
 	    
 	    //Thread.sleep(1000);
