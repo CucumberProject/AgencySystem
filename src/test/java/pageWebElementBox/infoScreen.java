@@ -71,11 +71,11 @@ public class infoScreen {
 		public static By bookHotel = By.name("logged");
 		public static By validation3 = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
 		public static By payOnArrive = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
-<<<<<<< HEAD
+
 		public static By bill = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[1]/td[4]");
 		public static By tax = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[2]/td[4]");
 		public static By total = By.xpath("//*[@id='body-section']/div[1]/div/div[7]/table/tbody/tr[3]/td[4]");
-=======
+
 		
 		//Supplier login page
 		
@@ -96,5 +96,4 @@ public class infoScreen {
 		public static By quickRooms = By.id("poprooms");
 		public static By bookNowButton = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[5]/div");
 		
->>>>>>> origin/master
 }

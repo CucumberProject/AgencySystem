@@ -189,7 +189,6 @@ public class couponDiscount_Steps {
 		else {
 			System.out.println("El descuento no es correcto");
 		}
-		Thread.sleep(2000);	
 		
 		iBill2 = Float.parseFloat(sBill2.replaceAll("[$]", ""));
 		iTax2 = Float.parseFloat(sTax2.replaceAll("[USD $]", ""));
@@ -204,7 +203,6 @@ public class couponDiscount_Steps {
 		else {
 			System.out.println("El descuento no es correcto");
 		}
-		Thread.sleep(2000);
 	}
 
 }
