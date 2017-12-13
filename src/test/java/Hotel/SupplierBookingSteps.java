@@ -20,7 +20,7 @@ import cucumber.api.java.en.When;
 
 
 public class SupplierBookingSteps {
-
+	//This is a test comment by Ale 
 	WebDriver driver = null;
 	String hotel = "";
 	String totalAmount="";
