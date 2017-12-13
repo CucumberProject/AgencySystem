@@ -1,6 +1,7 @@
 package Hotel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +18,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageWebElementBox.infoScreen;
 
 
 public class SupplierBookingSteps {
@@ -35,13 +37,14 @@ public class SupplierBookingSteps {
 		
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to("http://www.phptravels.net/supplier");
 		driver.manage().window().maximize();
 		
 		//Login
-		driver.findElement(By.name("email")).sendKeys("supplier@phptravels.com");
-		driver.findElement(By.name("password")).sendKeys("demosupplier");
-		driver.findElement(By.className("btn-primary")).click();
+		driver.findElement(infoScreen.usernameSupplier).sendKeys("supplier@phptravels.com");
+		driver.findElement(infoScreen.passwordSupplier).sendKeys("demosupplier");
+		driver.findElement(infoScreen.LogInButtonSupplier).click();
 	}
 
 	@When("^Supplier User want to book a hotel in the Supplier page$")
@@ -53,32 +56,37 @@ public class SupplierBookingSteps {
 		//Thread.sleep(500);
 		
 		//Click on "Quick Booking"
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='content']/div[1]/div[1]/button")));
-		driver.findElement(By.xpath("//*[@id='content']/div[1]/div[1]/button")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.quickBooking));
+		driver.findElement(infoScreen.quickBooking).click();
 		
 		//First window
-		Select dropdwn = new Select (driver.findElement(By.name("applytax")));
+		Select dropdwn = new Select (driver.findElement(infoScreen.taxDrpdwn));
 		dropdwn.selectByValue("yes");
-		dropdwn = new Select (driver.findElement(By.name("service")));
+		dropdwn = new Select (driver.findElement(infoScreen.serviceDrpdwn));
 		dropdwn.selectByValue("Hotels");
-		driver.findElement(By.xpath("//*[@id='quickbook']/div[2]/div/form/div[3]/button[2]")).click();
+		driver.findElement(infoScreen.quickNextButton).click();
 		
 		//Enter Information
 		
 		//Use a registered user.
-		dropdwn = new Select (driver.findElement(By.name("usertype")));
+		dropdwn = new Select (driver.findElement(infoScreen.customerType));
 		dropdwn.selectByValue("registered");
-		dropdwn = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[2]/div[2]/div/select")));
+		dropdwn = new Select (driver.findElement(infoScreen.customerName));
 		dropdwn.selectByVisibleText("Johny Smith - user@phptravels.com");
 		
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
     	jse.executeScript("window.scrollBy(0,250)", "");
     	
     	//Enter Check in and Check out date
-		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[1]/div")).click();
+    	
+    	//Check Out
+    	driver.findElement(infoScreen.quickCheckOut).click();
+    	driver.findElement(By.xpath("/html/body/div[4]/div[1]/table/tbody/tr[5]/td[5]")).click();
+    	//Check IN
+		driver.findElement(infoScreen.quickCheckIn).click();
     	driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[1]")).click();
-    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[6]")));
-    	driver.findElement(By.xpath("/html/body/div[3]/div[1]/table/tbody/tr[5]/td[6]")).click();
+    	driver.findElement(infoScreen.quickCheckOut).click();
+   	
 
     	//Stored check in and check out information
     	
@@ -86,7 +94,7 @@ public class SupplierBookingSteps {
     	checkOut = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[2]/div/input")).getAttribute("value");
     	
     	//Select Hotel
-		dropdwn = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[4]/div/select")));
+		dropdwn = new Select (driver.findElement(infoScreen.quickHotelName));
 		dropdwn.selectByVisibleText(" Rendezvous Hotels ");
 		
 		//Stored hotel
@@ -96,8 +104,8 @@ public class SupplierBookingSteps {
 		//Thread.sleep(500);
 	
 		//Select Room
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("poprooms")));
-    	dropdwn = new Select (driver.findElement(By.id("poprooms")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(infoScreen.quickRooms));
+    	dropdwn = new Select (driver.findElement(infoScreen.quickRooms));
 		dropdwn.selectByVisibleText("Superior Double");
 		
 		//Thread.sleep(500);
@@ -107,7 +115,8 @@ public class SupplierBookingSteps {
 		totalAmount = driver.findElement(By.xpath("//*[@id='grandtotal']")).getText(); 
 		
 		//Click on Book Now
-		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[5]/div")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(infoScreen.bookNowButton));
+		driver.findElement(infoScreen.bookNowButton).click();
 		
 		System.out.println(hotel);
 		System.out.println(checkIn);
@@ -146,19 +155,21 @@ public class SupplierBookingSteps {
 		
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
+		WebDriverWait wait = new WebDriverWait(driver,10);
 		driver.navigate().to("http://www.phptravels.net/");
 		driver.manage().window().maximize();
-		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/ul/ul/li[1]")).click();
-	    driver.findElement(By.linkText("Login")).click();
+		driver.findElement(infoScreen.accountButton).click();
+	    driver.findElement(infoScreen.singinButton).click();
 	    
-		driver.findElement(By.name("username")).sendKeys("user@phptravels.com");
-	    driver.findElement(By.name("password")).sendKeys("demouser");
-	    driver.findElement(By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button")).click();
+		driver.findElement(infoScreen.usernameUser).sendKeys("user@phptravels.com");
+	    driver.findElement(infoScreen.passwordUser).sendKeys("demouser");
+	    driver.findElement(infoScreen.LogInButtonUser).click();
 	    
-	    Thread.sleep(1000);
+	    //Thread.sleep(1000);
+	    driver.navigate().refresh();
 	    JavascriptExecutor jse = (JavascriptExecutor)driver;
-    	jse.executeScript("window.scrollBy(0,500)", "");
-	    Thread.sleep(1000);
+	    jse.executeScript("window.scrollBy(0,500)", "");
+	    //Thread.sleep(1000);
 	    
 	    
 	    boolean book = (driver.getPageSource().contains(bookID) && driver.getPageSource().contains(bookCode));
