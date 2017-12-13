@@ -18,18 +18,14 @@ import org.openqa.selenium.WebDriver;
 public class generatedCoupon_Steps {
 	
 	WebDriver driver;
-	static String codeCoupon;
-	static String idBook1, idBook2, codeBook1, codeBook2;
+	static String idBook1, idBook2;
 	
 	@Before
 	public void StartDiver() {
-		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
-		driver = new ChromeDriver();
 	}
 	
 	@After
 	public void StopDriver(){
-		driver.quit();
 	}
 	
 	@Given("^I am on admin Login home page$")
@@ -96,7 +92,6 @@ public class generatedCoupon_Steps {
 
 	@Given("^user enter to home page$")
 	public void user_enter_to_home_page(DataTable usercredentials) throws Throwable {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(" http://www.phptravels.net/");
 		driver.manage().window().maximize();
 		driver.findElement(infoScreen.accountButton).click();
