@@ -25,13 +25,14 @@ public class infoScreen {
 		public static By usernameUser = By.name("username");
 		public static By passwordUser = By.name("password");
 		public static By LogInButtonUser = By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button");
+		public static By accountPage = By.linkText("Account");
 		
 		// Asserts
 		public static By coupon1 = By.xpath("//*[@id='content']/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[4]\r\n");
 		public static By coupon2 = By.xpath("//*[@id='content']/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td[4]\r\\n");
 		
 		public static By idValidation = By.xpath("//*[@id=\"body-section\"]/div[1]/div/div[7]/div[1]/div[3]/span");
-		
+		public static By couponValidation = By.xpath("/html/body/div[2]/div/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[4]");
 		
 		// Use coupon
 		public static By validation1 = By.xpath("/html/body/div[4]/div/div[1]/div/div[1]/h3");
