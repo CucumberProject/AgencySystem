@@ -1,7 +1,7 @@
 package Hotel;
 
 import java.util.List;
-
+import pageWebElementBox.infoScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -37,49 +37,51 @@ public class CheckInSteps {
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 		table = arg1.raw();
-		WebDriverWait wait = new WebDriverWait(driver,5);
+		WebDriverWait wait = new WebDriverWait(driver,10);
 		
 		driver.navigate().to(" http://www.phptravels.net/admin");
 		driver.manage().window().maximize();
 		
 		//Login
-		driver.findElement(By.name("email")).sendKeys("admin@phptravels.com");
-		driver.findElement(By.name("password")).sendKeys("demoadmin");
-		driver.findElement(By.className("btn-primary")).click();
+		driver.findElement(infoScreen.usernameAdmin).sendKeys("admin@phptravels.com");
+		driver.findElement(infoScreen.passwordAdmin).sendKeys("demoadmin");
+		driver.findElement(infoScreen.LogInButtonAdmin).click();
 		
 		//Add New Hotel
 		driver.navigate().refresh();
-		String xpath = "//*[@id='social-sidebar-menu']/li[8]/a/span";
 			
-		driver.findElement(By.xpath(xpath)).click();
+		driver.findElement(infoScreen.hotelDrpdwn).click();
+		driver.findElement(infoScreen.hotelOption).click();
+		driver.findElement(infoScreen.hotelAddButton).click();
 		
-		xpath = "//*[@id='Hotels']/li[1]/a";
-		driver.findElement(By.xpath(xpath)).click();
-			
-		xpath = "//*[@id='content']/div/form/button";
-		driver.findElement(By.xpath(xpath)).click();
+		//Enter Hotel information
 		
-		//Initialize data table
+		driver.navigate().refresh();
 			
-		Select dropdown = new Select (driver.findElement(By.name("hotelstatus")));
+		Select dropdown = new Select (driver.findElement(infoScreen.hotelStatus));
 		dropdown.selectByVisibleText("Enabled");
 		
 		//Enter Name	
-		driver.findElement(By.name("hotelname")).sendKeys(table.get(1).get(1));
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelName));
+		driver.findElement(infoScreen.hotelName).click();
+		driver.findElement(infoScreen.hotelName).sendKeys(table.get(1).get(1));
 		
 		//Enter Description
-		driver.switchTo().frame(0);
+		WebElement desFrame = driver.findElement(infoScreen.hotelDescription);
+		driver.switchTo().frame(desFrame);
 		driver.findElement(By.cssSelector("body")).sendKeys(table.get(2).get(1));
 		driver.switchTo().defaultContent();
 		
-		dropdown = new Select (driver.findElement(By.name("hotelstars")));
+		
+		dropdown = new Select (driver.findElement(infoScreen.hotelStars));
 		dropdown.selectByVisibleText(table.get(4).get(1));
 				
-		dropdown = new Select (driver.findElement(By.name("hoteltype")));
+		dropdown = new Select (driver.findElement(infoScreen.hotelType));
 		dropdown.selectByVisibleText(table.get(5).get(1));
 		
 		//Enter Location
-		driver.findElement(By.xpath("//*[@id='s2id_autogen1']")).sendKeys(table.get(3).get(1));
+		driver.findElement(infoScreen.hotelLocation).sendKeys(table.get(3).get(1));
+		//Select a prediction 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[9]/ul/li/div/span")));
 		driver.findElement(By.xpath("/html/body/div[9]/ul/li/div/span")).click();
 		
@@ -92,25 +94,25 @@ public class CheckInSteps {
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/ul/li[4]/a")).click();
 		//Set Check in time
 		CheckIn = table.get(6).get(1);
-		driver.findElement(By.name("checkintime")).click();
-		driver.findElement(By.name("checkintime")).clear();
-		driver.findElement(By.name("checkintime")).sendKeys(CheckIn);
+		driver.findElement(infoScreen.policyCheckIn).click();
+		driver.findElement(infoScreen.policyCheckIn).clear();
+		driver.findElement(infoScreen.policyCheckIn).sendKeys(CheckIn);
 		//Set Check out time
 		CheckOut = table.get(7).get(1);
-		driver.findElement(By.name("checkouttime")).click();
-		driver.findElement(By.name("checkouttime")).clear();
-		driver.findElement(By.name("checkouttime")).sendKeys(CheckOut);
+		driver.findElement(infoScreen.policyCheckOut).click();
+		driver.findElement(infoScreen.policyCheckOut).clear();
+		driver.findElement(infoScreen.policyCheckOut).sendKeys(CheckOut);
 		//Select Payment options
-		driver.findElement(By.id("s2id_autogen4")).click();
-		dropdown = new Select (driver.findElement(By.name("hotelpayments[]")));
+		driver.findElement(infoScreen.addPayment).click();
+		dropdown = new Select (driver.findElement(infoScreen.paymentOption));
 		dropdown.selectByVisibleText("Credit Card");
-		driver.findElement(By.id("s2id_autogen4")).click();
-		dropdown = new Select (driver.findElement(By.name("hotelpayments[]")));
+		driver.findElement(infoScreen.addPayment).click();
+		dropdown = new Select (driver.findElement(infoScreen.paymentOption));
 		dropdown.selectByVisibleText("Master/ Visa Card");
 		//Enter Policy Text
-		driver.findElement(By.name("hotelpolicy")).sendKeys(table.get(8).get(1));
+		driver.findElement(infoScreen.policyText).sendKeys(table.get(8).get(1));
 		
-		driver.findElement(By.id("add")).click();
+		driver.findElement(infoScreen.CreateButtonHotel).click();
 		driver.quit();
 	}
 
@@ -127,19 +129,19 @@ public class CheckInSteps {
 		//Enter to the main page
 		driver2.navigate().to("http://www.phptravels.net/");
 		driver2.manage().window().maximize();
-		driver2.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/ul/ul/li[1]")).click();
-	    driver2.findElement(By.linkText("Login")).click();
+		driver2.findElement(infoScreen.accountButton).click();
+	    driver2.findElement(infoScreen.singinButton).click();
 	    
 	    //Login
-		driver2.findElement(By.name("username")).sendKeys("user@phptravels.com");
-	    driver2.findElement(By.name("password")).sendKeys("demouser");
-	    driver2.findElement(By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button")).click();
-	    //Thread.sleep(500);
+		driver2.findElement(infoScreen.usernameUser).sendKeys("user@phptravels.com");
+	    driver2.findElement(infoScreen.passwordUser).sendKeys("demouser");
+	    driver2.findElement(infoScreen.LogInButtonUser).click();
+	    
 	    
 	    //Enter to hotels and select one
 	    driver2.navigate().refresh();
-	    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a")));
-	    driver2.findElement(By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a")).click();
+	    wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
+	    driver2.findElement(infoScreen.hotelsPage).click();
 	    wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(table.get(1).get(1))));
 	    driver2.findElement(By.partialLinkText(table.get(1).get(1))).click();
 	  
@@ -151,7 +153,7 @@ public class CheckInSteps {
 	    //throw new PendingException();
 		WebDriverWait wait = new WebDriverWait(driver2,5);
 		
-		
+		//the xpath is where check in information is located when a user enter so check hotel information
 	    WebElement element = driver2.findElement(By.xpath("/html/body/div[4]/div[5]/div[3]/div/div/div[2]/div/div[1]/div[9]/div[2]"));
 	    JavascriptExecutor js = (JavascriptExecutor) driver2;
 	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
@@ -177,36 +179,35 @@ public class CheckInSteps {
 		driver.manage().window().maximize();
 		
 		//Login
-		driver.findElement(By.name("email")).sendKeys("admin@phptravels.com");
-		driver.findElement(By.name("password")).sendKeys("demoadmin");
-		driver.findElement(By.className("btn-primary")).click();
+		driver.findElement(infoScreen.usernameAdmin).sendKeys("admin@phptravels.com");
+		driver.findElement(infoScreen.passwordAdmin).sendKeys("demoadmin");
+		driver.findElement(infoScreen.LogInButtonAdmin).click();
 		
 		
 		//Change Check In information
 
 		driver.navigate().refresh();
-		String xpath = "//*[@id='social-sidebar-menu']/li[8]/a/span";
-		driver.findElement(By.xpath(xpath)).click();
-		xpath = "//*[@id='Hotels']/li[1]/a";
-		driver.findElement(By.xpath(xpath)).click();
+		
+		driver.findElement(infoScreen.hotelDrpdwn).click();
+		driver.findElement(infoScreen.hotelOption).click();
 		driver.findElement(By.partialLinkText(table.get(1).get(1))).click();
 		
 		//Select Policy tab
-		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/ul/li[4]/a")).click();
+		driver.findElement(infoScreen.hotelPolicyTab).click();
 		//Set Check in time
 		NewCI = table.get(2).get(1);
-		driver.findElement(By.name("checkintime")).click();
-		driver.findElement(By.name("checkintime")).clear();
-		driver.findElement(By.name("checkintime")).sendKeys(NewCI);
+		driver.findElement(infoScreen.policyCheckIn).click();
+		driver.findElement(infoScreen.policyCheckIn).clear();
+		driver.findElement(infoScreen.policyCheckIn).sendKeys(NewCI);
 		//Set Check out time
 		NewCO = table.get(3).get(1);
-		driver.findElement(By.name("checkouttime")).click();
-		driver.findElement(By.name("checkouttime")).clear();
-		driver.findElement(By.name("checkouttime")).sendKeys(NewCO);
+		driver.findElement(infoScreen.policyCheckOut).click();
+		driver.findElement(infoScreen.policyCheckOut).clear();
+		driver.findElement(infoScreen.policyCheckOut).sendKeys(NewCO);
 		
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("update")));
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.UpdateButtonHotel));
 		//Thread.sleep(500);
-		driver.findElement(By.id("update")).click();
+		driver.findElement(infoScreen.UpdateButtonHotel).click();
 		driver.quit();
 		
 	}
@@ -224,19 +225,20 @@ public class CheckInSteps {
 		//Enter to the main page
 		driver2.navigate().to("http://www.phptravels.net/");
 		driver2.manage().window().maximize();
-		driver2.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/ul/ul/li[1]")).click();
-		driver2.findElement(By.linkText("Login")).click();
+		driver2.findElement(infoScreen.accountButton).click();
+		driver2.findElement(infoScreen.singinButton).click();
 			    
 		//Login
-		driver2.findElement(By.name("username")).sendKeys("user@phptravels.com");
-		driver2.findElement(By.name("password")).sendKeys("demouser");
-		driver2.findElement(By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button")).click();
+		driver2.findElement(infoScreen.usernameUser).sendKeys("user@phptravels.com");
+		driver2.findElement(infoScreen.passwordUser).sendKeys("demouser");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(infoScreen.LogInButtonUser));
+		driver2.findElement(infoScreen.LogInButtonUser).click();
 		//Thread.sleep(500);
 			    
 		//Enter to hotels and select one
 		driver2.navigate().refresh();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a")));
-		driver2.findElement(By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
+		driver2.findElement(infoScreen.hotelsPage).click();
 		//Thread.sleep(500);
 		wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(table.get(1).get(1))));
 		driver2.findElement(By.partialLinkText(table.get(1).get(1))).click();
@@ -251,14 +253,12 @@ public class CheckInSteps {
 		WebDriverWait wait = new WebDriverWait(driver2,5);
 		
 		//Scroll down until find Check In information
-	    //Thread.sleep(500);
+		//the xpath is where check in information is located when a user enter so check hotel information
 	    WebElement element = driver2.findElement(By.xpath("/html/body/div[4]/div[5]/div[3]/div/div/div[2]/div/div[1]/div[9]/div[2]"));
 	    JavascriptExecutor js = (JavascriptExecutor) driver2;
 	    wait.until(ExpectedConditions.visibilityOf(element));
 	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
 	    //wait.until(ExpectedConditions.visibilityOf(element));
-	    
-	    // Thread.sleep(1000);
 	    
 	    Assert.assertTrue((driver2.getPageSource().contains(NewCI) && driver2.getPageSource().contains(NewCO)));
 	    System.out.println("Test Pass, Updated Check In information is available");

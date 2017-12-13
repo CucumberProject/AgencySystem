@@ -26,3 +26,5 @@ And Enter valida information in Contact tab
 | web| www.cozumelresort.com|
 | number| 9878007478|
 Then The New Hotel should be created
+| Fields | Values |
+| Hotel Name| Cozumel Resort|

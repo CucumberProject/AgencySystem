@@ -11,6 +11,31 @@ public class infoScreen {
 		public static By passwordAdmin = By.name("password");
 		public static By LogInButtonAdmin = By.className("btn-primary");
 		
+		// Admin hotel page
+		public static By hotelDrpdwn = By.xpath("//*[@id='social-sidebar-menu']/li[10]/a/span") ;
+		public static By hotelOption = By.xpath("//*[@id='Hotels']/li[1]/a");
+		public static By hotelAddButton = By.xpath("//*[@id='content']/div/form/button");
+		public static By hotelStatus = By.name("hotelstatus");
+		public static By hotelName = By.name("hotelname");
+		public static By hotelDescription = By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[1]/div[4]/div/div/div/div/iframe");
+		public static By hotelStars = By.name("hotelstars");
+		public static By hotelType = By.name("hoteltype");
+		public static By hotelLocation = By.xpath("//*[@id='s2id_autogen1']");
+		public static By hotelFacilitiesTab = By.xpath("//*[@id='content']/form/div/ul/li[2]/a");
+		public static By hotelPolicyTab = By.xpath("/html/body/div[2]/div/div/form/div/ul/li[4]/a");
+		public static By policyCheckIn = By.name("checkintime");
+		public static By policyCheckOut = By.name("checkouttime");
+		public static By addPayment = By.id("s2id_autogen4");
+		public static By paymentOption = By.name("hotelpayments[]");
+		public static By policyText = By.name("hotelpolicy");
+		public static By hotelContactTab = By.xpath("/html/body/div[2]/div/div/form/div/ul/li[5]/a");
+		public static By hotelEmail = By.name("hotelemail");
+		public static By hotelWebPage = By.name("hotelwebsite");
+		public static By hotelNumber = By.name("hotelphone");
+		public static By CreateButtonHotel = By.id("add");
+		public static By UpdateButtonHotel = By.id("update");
+		
+		
 		// Admin coupon page
 		public static By couponpage = By.partialLinkText("Coupons");
 		public static By addButton = By.xpath("//*[@id='content']/div[1]/div[2]/div[1]/button");	
@@ -27,6 +52,7 @@ public class infoScreen {
 		public static By passwordUser = By.name("password");
 		public static By LogInButtonUser = By.xpath("//*[@id='loginfrm']/div[1]/div[5]/button");
 		public static By accountPage = By.linkText("Account");
+		public static By hotelsPage = By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a");
 		
 		// Asserts
 		public static By coupon1 = By.xpath("//*[@id='content']/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[4]\r\n");
@@ -45,7 +71,30 @@ public class infoScreen {
 		public static By bookHotel = By.name("logged");
 		public static By validation3 = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
 		public static By payOnArrive = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
+<<<<<<< HEAD
 		public static By bill = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[1]/td[4]");
 		public static By tax = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[2]/td[4]");
 		public static By total = By.xpath("//*[@id='body-section']/div[1]/div/div[7]/table/tbody/tr[3]/td[4]");
+=======
+		
+		//Supplier login page
+		
+		public static By usernameSupplier = By.name("email"); 
+		public static By passwordSupplier = By.name("password");
+		public static By LogInButtonSupplier = By.className("btn-primary");
+		
+		//Supplier Quick Booking
+		public static By quickBooking = By.xpath("//*[@id='content']/div[1]/div[1]/button");
+		public static By taxDrpdwn = By.name("applytax");
+		public static By serviceDrpdwn = By.name("service");
+		public static By quickNextButton = By.xpath("//*[@id='quickbook']/div[2]/div/form/div[3]/button[2]");
+		public static By customerType = By.name("usertype");
+		public static By customerName = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[2]/div[2]/div/select");
+		public static By quickCheckIn = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[1]/div");
+		public static By quickCheckOut = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[2]/div");
+		public static By quickHotelName = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[4]/div/select");
+		public static By quickRooms = By.id("poprooms");
+		public static By bookNowButton = By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/form/div[5]/div");
+		
+>>>>>>> origin/master
 }
