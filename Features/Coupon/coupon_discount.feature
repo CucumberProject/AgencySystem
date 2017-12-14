@@ -1,3 +1,4 @@
+@CouponDiscount
 Feature: coupon_discount
 
 Scenario:

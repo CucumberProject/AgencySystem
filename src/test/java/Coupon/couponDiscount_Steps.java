@@ -1,23 +1,20 @@
 package Coupon;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-//import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import pageWebElementBox.infoScreen;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 public class couponDiscount_Steps {
 	
@@ -25,13 +22,13 @@ public class couponDiscount_Steps {
 	static String sBill1, sTax1, sTotal1, sBill2, sTax2, sTotal2;
 	static float iBill1, iTax1, iTotal1, discount1, total1, iBill2, iTax2, iTotal2, discount2, total2;
 	
-	@Before
+	@Before("@CouponDiscount")
 	public void StartDiver() {
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 	}
 	
-	@After
+	@After("@CouponDiscount")
 	public void StopDriver(){
 		driver.quit();
 	}
@@ -176,6 +173,7 @@ public class couponDiscount_Steps {
 	
 	@Then("^both coupon were used correctly$")
 	public void both_coupon_were_used_correctly() throws Throwable {
+//		Coupon Promo1
 		iBill1 = Float.parseFloat(sBill1.replaceAll("[$]", ""));
 		iTax1 = Float.parseFloat(sTax1.replaceAll("[USD $]", ""));
 		iTotal1 = Float.parseFloat(sTotal1.replaceAll("[USD $]", ""));
@@ -183,13 +181,7 @@ public class couponDiscount_Steps {
 		discount1 = iBill1 * 60 / 100;
 		total1 = discount1 + iTax1;
 		
-		if (total1 == iTotal1) {
-			System.out.println("El descuento de 40% es correcto");
-		}
-		else {
-			System.out.println("El descuento no es correcto");
-		}
-		
+//		Coupon Promo2
 		iBill2 = Float.parseFloat(sBill2.replaceAll("[$]", ""));
 		iTax2 = Float.parseFloat(sTax2.replaceAll("[USD $]", ""));
 		iTotal2 = Float.parseFloat(sTotal2.replaceAll("[USD $]", ""));
@@ -197,12 +189,11 @@ public class couponDiscount_Steps {
 		discount2 = iBill2 * 30 / 100;
 		total2 = discount2 + iTax2;
 		
-		if (total2 == iTotal2) {
-			System.out.println("El descuento de 70% es correcto");
-		}
-		else {
-			System.out.println("El descuento no es correcto");
-		}
+//		Result
+		Assert.assertTrue(total1 == iTotal1);
+		Assert.assertTrue(total2 == iTotal2);
+		JOptionPane.showMessageDialog(null,"Test Passed"); 
+//	    throw new PendingException();
 	}
 
 }

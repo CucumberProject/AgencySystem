@@ -44,6 +44,11 @@ public class infoScreen {
 		public static By codeText = By.name("code");
 		public static By AllHotels = By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div/div[2]/form/div[2]/div[1]/div[2]/div/div[1]/ins");
 		public static By addCoupon = By.xpath("//*[@id='ADD_COUPON']/div[2]/div/div[2]/div[3]/button");
+		public static By enableDropdown = By.xpath("/html/body/div[2]/div/div/div[7]/div[2]/div/div[2]/form/div/div/div/div/div[1]/div/div[1]/div/select");
+		public static By editButton = By.xpath("/html/body/div[2]/div/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[11]/span/a[1]");
+		public static By submitEditButton = By.xpath("/html/body/div[2]/div/div/div[7]/div[2]/div/div[4]/button");
+		public static By startDate = By.xpath("//*[@id='stardate']");
+		public static By expDate = By.xpath("//*[@id='expdate']");
 		
 		// User login page
 		public static By accountButton = By.xpath("/html/body/div[3]/div/div/div[2]/ul/ul/li[1]");
@@ -60,6 +65,7 @@ public class infoScreen {
 		
 		public static By idValidation = By.xpath("//*[@id=\"body-section\"]/div[1]/div/div[7]/div[1]/div[3]/span");
 		public static By reservedValidation = By.xpath("/html/body/div[4]/div[1]/div/div[1]/div/center/b");
+		
 		// Use coupon
 		public static By validation1 = By.xpath("/html/body/div[4]/div/div[1]/div/div[1]/h3");
 		public static By HotelsList = By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a");

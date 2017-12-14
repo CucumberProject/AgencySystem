@@ -1,3 +1,4 @@
+@GeneratedCoupon
 Feature: generated_coupon
 
 @CreateNewCoupons

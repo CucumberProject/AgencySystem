@@ -1,3 +1,4 @@
+@UseCoupon
 Feature: use_coupon
 
 @useCoupon_createcoupn
