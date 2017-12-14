@@ -23,13 +23,13 @@ public class useCoupon_Steps {
 	
 	static WebDriver driver;
 	
-	@Before
+	@Before("@UseCoupon")
 	public void StartDiver() {
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 	}
 	
-	@After
+	@After("@UseCoupon")
 	public void StopDriver(){
 		driver.quit();
 	}
@@ -154,7 +154,6 @@ public class useCoupon_Steps {
 			Alert al = driver.switchTo().alert();
 			String message = driver.switchTo().alert().getText();
 			al.accept();
-			System.out.println(message);
 			Assert.assertEquals(message, "Invalid Coupon");
 			JOptionPane.showMessageDialog(null,"Test Passed"); 
 //	    throw new PendingException();
