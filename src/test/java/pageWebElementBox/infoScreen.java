@@ -35,6 +35,22 @@ public class infoScreen {
 		public static By CreateButtonHotel = By.id("add");
 		public static By UpdateButtonHotel = By.id("update");
 		
+		//Admin Room page
+		public static By roomOption = By.xpath("//*[@id='Hotels']/li[2]/a");
+		public static By roomAddButton = By.xpath("/html/body/div[2]/div/div/div/form/button");
+		public static By roomStatus = By.name("roomstatus");
+		public static By roomType = By.name("roomtype");
+		public static By roomHotel = By.name("hotelid");
+		public static By roomDescription = By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[1]/div[5]/div/div/div/div/iframe");
+		public static By roomPrice = By.name("basicprice");
+		public static By roomQuantity = By.name("quantity");
+		public static By roomMinStay = By.name("minstay");
+		public static By roomMaxAdults = By.name("adults");
+		public static By roomMaxChildren = By.name("children");
+		public static By roomExtraBeds = By.name("extrabeds");
+		public static By roomBedCharges = By.name("bedcharges");
+		public static By roomAmenitiesTab = By.xpath("/html/body/div[2]/div/div/form/div/ul/li[2]/a");
+		public static By roomCreateButton = By.id("add");
 		
 		// Admin coupon page
 		public static By couponpage = By.partialLinkText("Coupons");
