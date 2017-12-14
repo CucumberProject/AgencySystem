@@ -88,9 +88,12 @@ public class infoScreen {
 		public static By Hotel = By.xpath("/html/body/div[4]/div[7]/div[2]/div/table/tbody/tr[1]/td/div[2]/div/h4/a/b");
 		public static By Room = By.xpath("//*[@id='ROOMS']/div/table/tbody/tr[1]/td/div[2]/div/div[5]/div[3]");
 		public static By couponcode = By.xpath("//*[@id='bookingdetails']/div[5]/div[2]/div[2]/div[2]/input");
+		public static By couponcode2 = By.xpath("/html/body/div[4]/div[2]/div[1]/div/div/form/div[3]/div[2]/div[2]/div[2]/input");
 		public static By couponSubmit = By.xpath("//*[@id='bookingdetails']/div[5]/div[2]/div[2]/div[3]/span");
+		public static By couponSubmit2 = By.xpath("/html/body/div[4]/div[2]/div[1]/div/div/form/div[3]/div[2]/div[2]/div[3]/span");
 		public static By validation2 = By.xpath("/html/body/div[4]/div[2]/div[1]/div/div/form/div[5]/div[2]/div[4]/div");
 		public static By bookHotel = By.name("logged");
+		public static By bookHotel2 = By.xpath("/html/body/div[4]/div[2]/div[1]/div/div/div[3]/button");
 		public static By validation3 = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
 		public static By payOnArrive = By.xpath("//*[@id='body-section']/div[1]/div/div[3]/center/button[1]");
 
