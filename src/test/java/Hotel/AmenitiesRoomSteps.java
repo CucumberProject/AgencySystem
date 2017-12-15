@@ -15,21 +15,35 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 public class AmenitiesRoomSteps {
 
-	WebDriver driver = null;
-	WebDriver driver2 = null;
+	WebDriver driver;
+	WebDriver driver2;
 	private List<List<String>> table;
+	
+	@Before
+	public void StartDiver() {
+		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
+		driver = new ChromeDriver();
+		//driver2 = new ChromeDriver();
+	}
+	
+	@After
+	public void StopDriver(){
+		driver2.quit();
+	}
 	
 	@Given("^I am Admin user$")
 	public void i_am_Admin_user() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    //throw new PendingException();
-		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
-		driver = new ChromeDriver();
+		//System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
+		//driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(" http://www.phptravels.net/admin");
 		driver.manage().window().maximize();
@@ -188,6 +202,7 @@ public class AmenitiesRoomSteps {
 		
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.roomCreateButton));
 		driver.findElement(infoScreen.roomCreateButton).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver.quit();
 	}
 
@@ -224,14 +239,13 @@ public class AmenitiesRoomSteps {
     	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[5]/section/div/table/tbody/tr/td/div[2]/div/div[5]/div[1]")));
     	driver2.findElement(By.xpath("/html/body/div[5]/section/div/table/tbody/tr/td/div[2]/div/div[5]/div[1]")).click();
     	
-    	wait.until(ExpectedConditions.elementToBeClickable(By.id("details53")));
     	
     	////*[@id="details53"]
     	boolean amenities = (driver2.getPageSource().contains(table.get(2).get(1))&&driver2.getPageSource().contains(table.get(3).get(1))&&driver2.getPageSource().contains(table.get(4).get(1)));
 	
     	Assert.assertTrue(amenities);
  	    System.out.println("Test Pass all amenities displayed");
- 	    driver2.quit();
+ 	   // driver2.quit();
 	}
 
 }

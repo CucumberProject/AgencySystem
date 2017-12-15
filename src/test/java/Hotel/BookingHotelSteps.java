@@ -5,6 +5,7 @@ import pageWebElementBox.infoScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -96,11 +97,17 @@ public class BookingHotelSteps {
 		String[] BookingId = new String[board.size()-1];
 		
 		for (int i=1 ; i<board.size() ; i++) {
+			
+			
+			WebElement element = driver.findElement(By.partialLinkText(board.get(i).get(1)));
+		    JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("arguments[0].scrollIntoView(true);", element); 
 			wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(board.get(i).get(1))));
 			driver.findElement(By.partialLinkText(board.get(i).get(1))).click();
-			JavascriptExecutor jse = (JavascriptExecutor)driver;
-	    	jse.executeScript("window.scrollBy(0,750)", "");
+	    	
 	    	//the xpath will change depending the hotel room selection
+			element = driver.findElement(By.xpath("//*[@id='ROOMS']/div/table/tbody/tr[1]/td/div[2]/div/div[5]/div[3]"));
+			js.executeScript("arguments[0].scrollIntoView(true);", element); 
 	    	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='ROOMS']/div/table/tbody/tr[1]/td/div[2]/div/div[5]/div[3]")));
 			driver.findElement(By.xpath("//*[@id='ROOMS']/div/table/tbody/tr[1]/td/div[2]/div/div[5]/div[3]")).click();
 			driver.findElement(infoScreen.bookHotel).click();
