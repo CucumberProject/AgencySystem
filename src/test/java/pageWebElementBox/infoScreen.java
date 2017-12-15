@@ -100,7 +100,6 @@ public class infoScreen {
 		public static By bill = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[1]/td[4]");
 		public static By tax = By.xpath("/html/body/div[4]/div[1]/div/div[9]/table/tbody/tr[2]/td[4]");
 		public static By total = By.xpath("//*[@id='body-section']/div[1]/div/div[7]/table/tbody/tr[3]/td[4]");
-
 		
 		//Supplier login page
 		
