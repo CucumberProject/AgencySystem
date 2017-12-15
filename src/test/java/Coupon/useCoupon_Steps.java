@@ -23,13 +23,17 @@ public class useCoupon_Steps {
 	
 	static WebDriver driver;
 	
+
 	@Before("@UseCoupon")
+
 	public void StartDiver() {
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 	}
 	
+
 	@After("@UseCoupon")
+
 	public void StopDriver(){
 		driver.quit();
 	}
