@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		//features = {"Features//Hotel//amenitiesroom.feature"},
-		//features = {"Features//Hotel//bookinghotel.feature"},
+		features = {"Features//Hotel//bookinghotel.feature"},
 		//features = {"Features//Hotel//checkinfo.feature"},
 		//features = {"Features//Hotel//hotelfacilities.feature"},
 		//features = {"Features//Hotel//newhotel.feature"},

@@ -130,6 +130,7 @@ public class HotelFacilities {
 		//Create
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.CreateButtonHotel));
 		driver.findElement(infoScreen.CreateButtonHotel).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver.quit();
 	}
 
@@ -158,14 +159,14 @@ public class HotelFacilities {
 	  	driver2.findElement(infoScreen.hotelsPage).click();
 	  	
 	  	//Click on specific hotel 
+	  	WebElement element = driver2.findElement(By.partialLinkText(table.get(0).get(1)));
+	    JavascriptExecutor js = (JavascriptExecutor) driver2;
+	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
 	  	wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(table.get(0).get(1))));
 		driver2.findElement(By.partialLinkText(table.get(0).get(1))).click();
-		JavascriptExecutor jse = (JavascriptExecutor)driver2;
-    	jse.executeScript("window.scrollBy(0,600)", "");
-	  	
+		
     	//Scroll down until facilities are visible 
-    	WebElement element = driver2.findElement(By.xpath("/html/body/div[5]/div[2]/div[1]"));
- 	    JavascriptExecutor js = (JavascriptExecutor) driver2;
+    	element = driver2.findElement(By.xpath("/html/body/div[5]/div[2]/div[1]"));
  	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
  	    wait.until(ExpectedConditions.visibilityOf(element));
  	    
