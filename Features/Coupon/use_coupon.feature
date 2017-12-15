@@ -1,6 +1,6 @@
 Feature: use_coupon
 
-@useCoupon_createcoupn
+#@useCoupon_createcoupn
 Scenario:
 A New system has been released to book hotels, car and tours.
 Given I am on admin login home page
@@ -11,7 +11,7 @@ Then User add a new coupon
 	| 75 | 2 | Test | 
 
 
-@useCoupon_maxLimit
+#@useCoupon_maxLimit
 Scenario: 
 Successful use the coupon
 	Given User is on home Page

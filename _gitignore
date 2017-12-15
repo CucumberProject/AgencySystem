@@ -1,0 +1,157 @@
+# ===========================
+
+
+# Cucumber Report Files
+
+
+# ===========================
+
+
+*.js
+
+
+*.html
+
+
+*.css
+
+
+
+
+
+# ===========================
+
+
+# IDE Files
+
+
+# ===========================
+
+
+
+
+
+# Eclipse
+
+
+.classpath
+
+
+.metadata/
+
+
+.project
+
+
+.settings/
+
+
+.externalToolBuilders/
+
+
+*.launch
+
+
+*.tern-project
+
+
+*.ejbdeploy
+
+
+*.springbeans
+
+
+build/
+
+
+
+
+
+# IntelliJ
+
+
+out/
+
+
+.idea/
+
+
+lib/
+
+
+*.iml
+
+
+*.iws
+
+
+
+
+
+# ===========================
+
+
+# Build Files
+
+
+# ===========================
+
+
+
+
+
+# Maven
+
+
+log/
+
+
+target/
+
+
+
+
+
+# ===========================
+
+
+# Operating System
+
+
+# ===========================
+
+
+.DS_Store
+
+
+.AppleDouble
+
+
+.LSOverride
+
+
+
+
+
+# Windows
+
+
+Thumbs.db
+
+
+ehthumbs.db
+
+
+/.springBeans
+
+
+
+
+
+/bin/
+
+
+/target/
+
+/target/
+
