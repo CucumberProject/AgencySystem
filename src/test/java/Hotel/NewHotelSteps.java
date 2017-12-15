@@ -1,10 +1,12 @@
 package Hotel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +17,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageWebElementBox.infoScreen;
 
 
 public class NewHotelSteps {
@@ -27,6 +30,7 @@ public class NewHotelSteps {
 		
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.navigate().to(" http://www.phptravels.net/admin");
 		driver.manage().window().maximize();
 	}
@@ -35,9 +39,9 @@ public class NewHotelSteps {
 	public void i_enter_username_as_And_I_enter_password_as_to_login(String arg1, String arg2) throws Throwable {
 	    
 		//Login
-			driver.findElement(By.name("email")).sendKeys(arg1);
-			driver.findElement(By.name("password")).sendKeys(arg2);
-			driver.findElement(By.className("btn-primary")).click();
+			driver.findElement(infoScreen.usernameAdmin).sendKeys(arg1);
+			driver.findElement(infoScreen.passwordAdmin).sendKeys(arg2);
+			driver.findElement(infoScreen.LogInButtonAdmin).click();
 	}
 
 	@Given("^The User want to create a New Hotel$")
@@ -45,15 +49,10 @@ public class NewHotelSteps {
 	    
 		//Add New Hotel
 			driver.navigate().refresh();
-			String xpath = "//*[@id='social-sidebar-menu']/li[8]/a/span";
 				
-			driver.findElement(By.xpath(xpath)).click();
-
-			xpath = "//*[@id='Hotels']/li[1]/a";
-			driver.findElement(By.xpath(xpath)).click();
-				
-			xpath = "//*[@id='content']/div/form/button";
-			driver.findElement(By.xpath(xpath)).click();
+			driver.findElement(infoScreen.hotelDrpdwn).click();
+			driver.findElement(infoScreen.hotelOption).click();
+			driver.findElement(infoScreen.hotelAddButton).click();
 		
 	}
 
@@ -71,26 +70,29 @@ public class NewHotelSteps {
 		
 		WebDriverWait wait = new WebDriverWait(driver,5);
 		
-		Select dropdown = new Select (driver.findElement(By.name("hotelstatus")));
+		Select dropdown = new Select (driver.findElement(infoScreen.hotelStatus));
 		dropdown.selectByVisibleText("Enabled");
 		
 		//Enter name
-		driver.findElement(By.name("hotelname")).sendKeys(name);
+		driver.findElement(infoScreen.hotelName).sendKeys(name);
+		
+		
 		
 		//Enter Description
-		driver.switchTo().frame(0);
+		WebElement desFrame = driver.findElement(infoScreen.hotelDescription);
+		driver.switchTo().frame(desFrame);
 		driver.findElement(By.cssSelector("body")).sendKeys(description);
 		driver.switchTo().defaultContent();
 		
 		
-		dropdown = new Select (driver.findElement(By.name("hotelstars")));
+		dropdown = new Select (driver.findElement(infoScreen.hotelStars));
 		dropdown.selectByVisibleText(stars);
 		
-		dropdown = new Select (driver.findElement(By.name("hoteltype")));
+		dropdown = new Select (driver.findElement(infoScreen.hotelType));
 		dropdown.selectByVisibleText(type);
 	
 		//Enter Location
-		driver.findElement(By.xpath("//*[@id='s2id_autogen1']")).sendKeys(location);
+		driver.findElement(infoScreen.hotelLocation).sendKeys(location);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[9]/ul/li/div/span")));
 		driver.findElement(By.xpath("/html/body/div[9]/ul/li/div/span")).click();
 	   
@@ -105,7 +107,7 @@ public class NewHotelSteps {
     	jse.executeScript("window.scrollBy(0,-500)", "");
 		
 		//Select Facilities tab
-		driver.findElement(By.xpath("//*[@id='content']/form/div/ul/li[2]/a")).click();
+		driver.findElement(infoScreen.hotelFacilitiesTab).click();
 		//Select Facilities 
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[2]/div/div/div[4]/label")).click();
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/div[1]/div/div[2]/div/div/div[7]/label")).click();
@@ -123,27 +125,28 @@ public class NewHotelSteps {
 		//Select Policy tab
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/ul/li[4]/a")).click();
 		//Set Check in time
-		driver.findElement(By.name("checkintime")).click();
-		driver.findElement(By.name("checkintime")).clear();
-		driver.findElement(By.name("checkintime")).sendKeys(checkIn);
+		driver.findElement(infoScreen.policyCheckIn).click();
+		driver.findElement(infoScreen.policyCheckIn).clear();
+		driver.findElement(infoScreen.policyCheckIn).sendKeys(checkIn);
 		//Set Check out time
-		driver.findElement(By.name("checkouttime")).click();
-		driver.findElement(By.name("checkouttime")).clear();
-		driver.findElement(By.name("checkouttime")).sendKeys(checkOut);
+		driver.findElement(infoScreen.policyCheckOut).click();
+		driver.findElement(infoScreen.policyCheckOut).clear();
+		driver.findElement(infoScreen.policyCheckOut).sendKeys(checkOut);
 		//Select Payment options
-		driver.findElement(By.id("s2id_autogen4")).click();
-		Select dropdown = new Select (driver.findElement(By.name("hotelpayments[]")));
+		driver.findElement(infoScreen.addPayment).click();
+		Select dropdown = new Select (driver.findElement(infoScreen.paymentOption));
 		dropdown.selectByVisibleText("Credit Card");
-		driver.findElement(By.id("s2id_autogen4")).click();
-		dropdown = new Select (driver.findElement(By.name("hotelpayments[]")));
+		driver.findElement(infoScreen.addPayment).click();
+		dropdown = new Select (driver.findElement(infoScreen.paymentOption));
 		dropdown.selectByVisibleText("Master/ Visa Card");
 		//Enter Policy Text
-		driver.findElement(By.name("hotelpolicy")).sendKeys(policyText);
+		driver.findElement(infoScreen.policyText).sendKeys(policyText);
 	}
 
 	@When("^Enter valida information in Contact tab$")
 	public void enter_valida_information_in_Contact_tab(DataTable arg1) throws Throwable {
-	    
+		
+		WebDriverWait wait = new WebDriverWait(driver,5);
 		//Select Contact Tab
 		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/ul/li[5]/a")).click();
 		
@@ -153,31 +156,34 @@ public class NewHotelSteps {
 		String number = table.get(3).get(1);
 		
 		//Enter Hotel Email
-		driver.findElement(By.name("hotelemail")).click();
-		driver.findElement(By.name("hotelemail")).sendKeys(email);
+		driver.findElement(infoScreen.hotelEmail).click();
+		driver.findElement(infoScreen.hotelEmail).sendKeys(email);
 		//Enter Hotel Website
-		driver.findElement(By.name("hotelwebsite")).click();
-		driver.findElement(By.name("hotelwebsite")).sendKeys(web);
+		driver.findElement(infoScreen.hotelWebPage).click();
+		driver.findElement(infoScreen.hotelWebPage).sendKeys(web);
 		//Enter Hotel Phone
-		driver.findElement(By.name("hotelphone")).click();
-		driver.findElement(By.name("hotelphone")).sendKeys(number);
+		driver.findElement(infoScreen.hotelNumber).click();
+		driver.findElement(infoScreen.hotelNumber).sendKeys(number);
 		//Submit
-		driver.findElement(By.id("add")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.CreateButtonHotel));
+		driver.findElement(infoScreen.CreateButtonHotel).click();
 	}
 
 	@Then("^The New Hotel should be created$")
-	public void the_New_Hotel_should_be_created() throws Throwable {
+	public void the_New_Hotel_should_be_created(DataTable arg1) throws Throwable {
 		WebDriverWait wait = new WebDriverWait(driver,5);
 		
-		driver.navigate().refresh();
+		
 		//Thread.sleep(1000);
 		
+		table = arg1.raw();
+		
 		//Verify if the hotel is created and displayed in the menu
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Cozumel Resort")));
-		String comp = driver.findElement(By.partialLinkText("Cozumel Resort")).getText();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(table.get(1).get(1))));
+		String comp = driver.findElement(By.partialLinkText(table.get(1).get(1))).getText();
 		
 		
-		Assert.assertEquals(comp, "Cozumel Resort");
+		Assert.assertEquals(comp,table.get(1).get(1));
 		System.out.println("Test Pass, new hotel was created");
 		
 		driver.quit();
