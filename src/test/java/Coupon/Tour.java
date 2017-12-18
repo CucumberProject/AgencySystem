@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Tour {
 	Coupon coupon = new Coupon();
+	static String total;
+	static String discount;
 	
 	public void bookATour(WebDriver driver) {
 		//Wait until the Account page is loaded 
@@ -60,12 +62,32 @@ public class Tour {
 			Assert.assertEquals("Invalid Coupon", message);
 			System.out.println("Scenario: Passed");
 		}catch (Exception e) {
-			System.out.println("Scenario:failed");
+			System.out.println("Scenario: failed");
 		}
 		
 	}
 		
-		//coupon.deleteCoupon();
+	public void checkDiscount(WebDriver driver, String couponDiscount) {
+		WebElement confirmBookingButton = driver.findElement(By.name("logged"));
+		confirmBookingButton.click();
+		WebDriverWait wait = new WebDriverWait(driver,10); 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"body-section\"]/div[1]/div/div[3]/center/button[2]")));
+		discount = couponDiscount;
+		float total1 = (Float.parseFloat(total) * (Float.parseFloat(discount)/100));
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+    	jse.executeScript("window.scrollBy(0,850)", "");
+		WebDriverWait wait2 = new WebDriverWait(driver,10); 
+		wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"body-section\"]/div[1]/div")));
+		WebElement invoice = driver.findElement(By.xpath("//*[@id=\"body-section\"]/div[1]/div/div[9]/table/tbody/tr[3]/td[4]"));
+		String totalInvoice = invoice.getText();
+		//System.out.println("Total Invoice: " + totalInvoice);
+		String[] divideString = totalInvoice.split("\\$");
+		String symbol = divideString[0];
+		//System.out.println(symbol);
+		float amount = Float.parseFloat(divideString[1]);
+		Assert.assertEquals(total1, amount, 0.1);
+		System.out.println("Scenario: Passed");
+	}
 			
 	
 		
