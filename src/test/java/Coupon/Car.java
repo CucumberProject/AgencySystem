@@ -7,11 +7,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Car {
 	
 	Coupon coupon = new Coupon();
+	
 	
 	public void bookACar(WebDriver driver) {
 		//Wait until the Account page is loaded 
@@ -34,6 +36,10 @@ public class Car {
     	jse.executeScript("window.scrollBy(0,750)", "");
     	WebDriverWait wait3 = new WebDriverWait(driver,10); 
 		wait3.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/form/button"))));
+		
+		Select dropdown = new Select(driver.findElement(By.id("pickuplocation")));
+		dropdown.selectByIndex(1);
+		
 		WebElement bookNowButton = driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/form/button"));
 		//dropdownlist to select a location
 		
@@ -52,9 +58,7 @@ public class Car {
 	}
 	
 	public void validateCoupon(WebDriver driver){
-		if(driver.findElement(By.xpath("//*[@id=\"bookingdetails\"]/div[5]/div[2]/div[4]")).isDisplayed()){
-			System.out.println("Scenario: Failed");
-		}else {
+		try{
 			WebDriverWait wait = new WebDriverWait(driver,10); 
 			wait.until(ExpectedConditions.alertIsPresent());
 			Alert alertMessage = driver.switchTo().alert();
@@ -62,8 +66,10 @@ public class Car {
 			alertMessage.accept();
 			Assert.assertEquals("Invalid Coupon", message);
 			System.out.println("Scenario: Passed");
+		}catch (Exception e) {
+			System.out.println("Scenario: failed");
 		}
-		//coupon.deleteCoupon();
+		
 	}
 
 }

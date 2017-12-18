@@ -1,6 +1,7 @@
 package Coupon;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -79,6 +80,21 @@ public class Hotel {
 		Assert.assertEquals(total1, amount, 0.1);
 		System.out.println("Scenario: Passed");
 			
+		
+	}
+	
+	public void validateCoupon(WebDriver driver){
+		try{
+			WebDriverWait wait = new WebDriverWait(driver,10); 
+			wait.until(ExpectedConditions.alertIsPresent());
+			Alert alertMessage = driver.switchTo().alert();
+			String message = alertMessage.getText();
+			alertMessage.accept();
+			Assert.assertEquals("Invalid Coupon", message);
+			System.out.println("Scenario: Passed");
+		}catch (Exception e) {
+			System.out.println("Scenario: failed");
+		}
 		
 	}
 		

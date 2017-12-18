@@ -12,7 +12,7 @@ And I create a coupon for all hotels only
 | 50      | 5         | testCoupon_hotel |
 Then A coupon for all hotels should be created
 
-
+@hotelScenario
 Scenario: Coupon is valid for hotel booking 
 Given I log in as a user
 | Login                | Password  |
@@ -21,6 +21,7 @@ When I start booking a hotel
 And I use a coupon as "testCoupon_hotel" for hotel
 Then The price should have a discount
 
+@hotelScenario
 Scenario: Coupon is not valid for tours booking
 Given I log in as a user
 | Login                | Password  |
@@ -29,6 +30,7 @@ When I start booking a tour
 And I use a coupon for hotel as "testCoupon_hotel" in a tour
 Then The coupon should not be valid for tour
 
+@hotelScenario
 Scenario: Coupon is not valid for cars booking
 Given I log in as a user
 | Login                | Password  |
