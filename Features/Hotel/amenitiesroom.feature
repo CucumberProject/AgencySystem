@@ -1,5 +1,5 @@
 Feature: amenitiesroom
-
+@amenities
 Scenario: User should be able to see all the amenities assigned to the room
 
 Given I am Admin user 

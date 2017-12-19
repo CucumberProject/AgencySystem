@@ -101,9 +101,9 @@ public class HotelFacilities {
 	    // Write code here that turns the phrase above into concrete actions
 	    //throw new PendingException();
 		
-		WebDriverWait wait = new WebDriverWait(driver,5);
+		WebDriverWait wait = new WebDriverWait(driver,10);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,-500)","" );
+		jse.executeScript("window.scrollBy(0,-600)","" );
 		
 		//Click on amenities Tab
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelFacilitiesTab));
@@ -144,7 +144,7 @@ public class HotelFacilities {
 		
 		driver2 = new ChromeDriver();
 		driver2.navigate().to("http://www.phptravels.net/");
-		WebDriverWait wait = new WebDriverWait(driver2,5);
+		WebDriverWait wait = new WebDriverWait(driver2,10);
 		driver2.manage().window().maximize();
 		driver2.findElement(infoScreen.accountButton).click();
 	    driver2.findElement(infoScreen.singinButton).click();
@@ -210,15 +210,16 @@ public class HotelFacilities {
 		
 		//Click on Hotels
 //		driver.navigate().refresh();
-		WebDriverWait wait = new WebDriverWait(driver,5);
+		WebDriverWait wait = new WebDriverWait(driver,10);
 		driver.navigate().refresh();
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
 		driver.findElement(infoScreen.hotelsPage).click();
 		
 		//Select the Hotel
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(arg1)));
 		WebElement element = driver.findElement(By.partialLinkText(arg1));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		 js.executeScript("arguments[0].scrollIntoView(true);", element); 
+		js.executeScript("arguments[0].scrollIntoView(true);", element); 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(arg1)));
 		driver.findElement(By.partialLinkText(arg1)).click();
 		

@@ -113,6 +113,7 @@ public class CheckInSteps {
 		driver.findElement(infoScreen.policyText).sendKeys(table.get(8).get(1));
 		
 		driver.findElement(infoScreen.CreateButtonHotel).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver.quit();
 	}
 
@@ -142,6 +143,9 @@ public class CheckInSteps {
 	    driver2.navigate().refresh();
 	    wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
 	    driver2.findElement(infoScreen.hotelsPage).click();
+	    WebElement element = driver2.findElement(By.partialLinkText(table.get(1).get(1)));
+	    JavascriptExecutor js = (JavascriptExecutor) driver2;
+	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
 	    wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(table.get(1).get(1))));
 	    driver2.findElement(By.partialLinkText(table.get(1).get(1))).click();
 	  
@@ -206,8 +210,8 @@ public class CheckInSteps {
 		driver.findElement(infoScreen.policyCheckOut).sendKeys(NewCO);
 		
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.UpdateButtonHotel));
-		//Thread.sleep(500);
 		driver.findElement(infoScreen.UpdateButtonHotel).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver.quit();
 		
 	}
@@ -239,7 +243,9 @@ public class CheckInSteps {
 		driver2.navigate().refresh();
 		wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
 		driver2.findElement(infoScreen.hotelsPage).click();
-		//Thread.sleep(500);
+		WebElement element = driver2.findElement(By.partialLinkText(table.get(1).get(1)));
+	    JavascriptExecutor js = (JavascriptExecutor) driver2;
+	    js.executeScript("arguments[0].scrollIntoView(true);", element); 
 		wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(table.get(1).get(1))));
 		driver2.findElement(By.partialLinkText(table.get(1).get(1))).click();
 		
