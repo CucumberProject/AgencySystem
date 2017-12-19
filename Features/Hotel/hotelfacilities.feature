@@ -36,4 +36,4 @@ Then I should be able to see the Facilities from the "<hotel>"
 Examples:
 |hotel|
 |Rendezvous Hotels|
-|Swissotel Le Plaza Basel|
+

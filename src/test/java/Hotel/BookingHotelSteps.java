@@ -82,10 +82,10 @@ public class BookingHotelSteps {
 			wait.until(ExpectedConditions.elementToBeClickable(infoScreen.UpdateButtonHotel));
 			driver2.findElement(infoScreen.UpdateButtonHotel).click();
 		}
-		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver2.quit();
 
-	}
+		}
 
 	@Then("^The user should be able to book$")
 	public void the_user_should_be_able_to_book(DataTable arg1) throws Throwable {
@@ -93,16 +93,16 @@ public class BookingHotelSteps {
 
 		driver.navigate().refresh();
 		board = arg1.raw();
-		WebDriverWait wait = new WebDriverWait(driver,5);
+		WebDriverWait wait = new WebDriverWait(driver,10);
 		String[] BookingId = new String[board.size()-1];
 		
 		for (int i=1 ; i<board.size() ; i++) {
 			
-			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(board.get(i).get(1))));
 			WebElement element = driver.findElement(By.partialLinkText(board.get(i).get(1)));
 		    JavascriptExecutor js = (JavascriptExecutor) driver;
 		    js.executeScript("arguments[0].scrollIntoView(true);", element); 
-			wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(board.get(i).get(1))));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(board.get(i).get(1))));
 			driver.findElement(By.partialLinkText(board.get(i).get(1))).click();
 	    	
 	    	//the xpath will change depending the hotel room selection
@@ -113,6 +113,7 @@ public class BookingHotelSteps {
 			driver.findElement(infoScreen.bookHotel).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='body-section']/div[1]/div/div[7]/div[1]/div[3]/span")));
 			BookingId[i-1] = driver.findElement(By.xpath("//*[@id='body-section']/div[1]/div/div[7]/div[1]/div[3]/span")).getText();	
+			wait.until(ExpectedConditions.elementToBeClickable(infoScreen.hotelsPage));
 			driver.findElement(infoScreen.hotelsPage).click();
 			
 		}
@@ -151,7 +152,8 @@ public class BookingHotelSteps {
 		driver2.findElement(infoScreen.hotelOption).click();
 		
 		for (int i=1 ; i < board.size() ; i++){
-			driver.navigate().refresh();
+			driver2.navigate().refresh();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(board.get(i).get(1))));
 			driver2.findElement(By.partialLinkText(board.get(i).get(1))).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(infoScreen.hotelStatus));
@@ -159,8 +161,9 @@ public class BookingHotelSteps {
 			dropdown.selectByVisibleText("Disabled");
 			wait.until(ExpectedConditions.elementToBeClickable(infoScreen.UpdateButtonHotel));
 			driver2.findElement(infoScreen.UpdateButtonHotel).click();
-		}
 		
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div[1]")));
 		driver2.quit();
 		
 	}

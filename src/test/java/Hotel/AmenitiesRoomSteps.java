@@ -26,14 +26,14 @@ public class AmenitiesRoomSteps {
 	WebDriver driver2;
 	private List<List<String>> table;
 	
-	@Before
+	@Before("@amenities")
 	public void StartDiver() {
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 		//driver2 = new ChromeDriver();
 	}
 	
-	@After
+	@After("@amenities")
 	public void StopDriver(){
 		driver2.quit();
 	}
