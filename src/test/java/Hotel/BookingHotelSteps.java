@@ -20,8 +20,8 @@ import cucumber.api.java.en.When;
 
 public class BookingHotelSteps {
 
-	WebDriver driver = null;
-	WebDriver driver2 = null;
+	private WebDriver driver = null;
+	private WebDriver driver2 = null;
 	private List<List<String>> board;
 	
 	@Given("^The user log in the Travel Agency Page$")

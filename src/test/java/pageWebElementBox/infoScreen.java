@@ -51,6 +51,7 @@ public class infoScreen {
 		public static By roomBedCharges = By.name("bedcharges");
 		public static By roomAmenitiesTab = By.xpath("/html/body/div[2]/div/div/form/div/ul/li[2]/a");
 		public static By roomCreateButton = By.id("add");
+		public static By roomUpdateButton = By.id("update");
 		
 		// Admin coupon page
 		public static By couponpage = By.partialLinkText("Coupons");
